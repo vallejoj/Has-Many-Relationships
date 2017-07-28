@@ -33,3 +33,16 @@ WHERE posts.created_at < '2015-01-01';
 SELECT comments.*, posts.title AS "Post Title", posts.url AS "post_url", comments.body AS "comment_body"
 FROM comments JOIN posts ON comments.users_id = posts.id
 WHERE posts.created_at < '2015-01-01';
+
+--10
+
+SELECT comments.*, posts.title AS "Post Title", posts.url AS "post_url", comments.body AS "comment_body"
+FROM comments JOIN posts ON comments.users_id = posts.id
+WHERE comments.body LIKE '%USB%';
+
+--11
+SELECT  posts.title AS "Post Title", users.first_name, users.last_name
+FROM users INNER JOIN posts ON posts.users_id = users.id
+INNER JOIN comments ON comments.posts_id = posts.id
+WHERE comments.body LIKE '%matrix%';
+COUNT(*);
