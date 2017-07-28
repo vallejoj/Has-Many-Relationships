@@ -14,3 +14,7 @@ WHERE users.first_name = 'Norene' AND users.last_name = 'Schmitt';
 SELECT users.username
 FROM users
 WHERE created_at > '2015-01-01';
+
+SELECT posts.title, posts.content, users.username
+FROM posts JOIN users ON posts.users_id = users.id
+WHERE posts.created_at > '2015-01-01';
