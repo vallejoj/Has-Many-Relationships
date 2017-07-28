@@ -28,7 +28,7 @@ CREATE TABLE users (
    content TEXT DEFAULT NULL,
    created_at TIMESTAMP NOT NULL DEFAULT NOW(),
    updated_at TIMESTAMP NOT NULL DEFAULT NOW(),
-   foreign_id INTEGER REFERENCES users(id)
+   users_id INTEGER REFERENCES users(id)
   );
 
   CREATE TABLE comments (
