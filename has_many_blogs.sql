@@ -5,7 +5,7 @@ CREATE USER has_many_user;
 
 CREATE DATABASE has_many_blogs WITH OWNER has_many_user;
 
-\c has_many_blogs
+\c has_many_blogs has_many_user;
 
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS posts;
@@ -23,18 +23,20 @@ CREATE TABLE users (
 
  CREATE TABLE posts (
    id SERIAL NOT NULL PRIMARY KEY,
-   foreign_id INTEGER REFERENCES users,
-   post_id SERIAL NOT NULL,
    title VARCHAR(180) DEFAULT NULL,
     url VARCHAR(510) DEFAULT NULL,
    content TEXT DEFAULT NULL,
    created_at TIMESTAMP NOT NULL DEFAULT NOW(),
-   updated_at TIMESTAMP NOT NULL DEFAULT NOW()
+   updated_at TIMESTAMP NOT NULL DEFAULT NOW(),
+   foreign_id INTEGER REFERENCES users(id)
   );
 
   CREATE TABLE comments (
     id SERIAL NOT NULL PRIMARY KEY,
     body VARCHAR(510) NOT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT NOW(),
-    updated_at TIMESTAMP NOT NULL DEFAULT NOW()
+    updated_at TIMESTAMP NOT NULL DEFAULT NOW(),
+    users_id INTEGER REFERENCES users(id),
+    posts_id INTEGER REFERENCES posts(id)
    );
+\i scripts/blog_data.sql;
