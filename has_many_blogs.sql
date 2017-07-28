@@ -1,9 +1,9 @@
 DROP DATABASE IF EXISTS has_many_blogs;
 DROP USER IF EXISTS has_many_user;
 
-CREATE USER has_many_user ;
+CREATE USER has_many_user;
 
-CREATE DATABASE has_many_blogs WITH OWNER has_many_blogs;
+CREATE DATABASE has_many_blogs WITH OWNER has_many_user;
 
 \c has_many_blogs
 
@@ -23,7 +23,8 @@ CREATE TABLE users (
 
  CREATE TABLE posts (
    id SERIAL NOT NULL PRIMARY KEY,
-   post_id SERIAL NOT NULL 
+   foreign_id INTEGER REFERENCES users,
+   post_id SERIAL NOT NULL,
    title VARCHAR(180) DEFAULT NULL,
     url VARCHAR(510) DEFAULT NULL,
    content TEXT DEFAULT NULL,
@@ -31,7 +32,7 @@ CREATE TABLE users (
    updated_at TIMESTAMP NOT NULL DEFAULT NOW()
   );
 
-  CREATE TABLE users (
+  CREATE TABLE comments (
     id SERIAL NOT NULL PRIMARY KEY,
     body VARCHAR(510) NOT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT NOW(),
