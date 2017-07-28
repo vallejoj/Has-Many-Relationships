@@ -18,3 +18,6 @@ WHERE created_at > '2015-01-01';
 SELECT posts.title, posts.content, users.username
 FROM posts JOIN users ON posts.users_id = users.id
 WHERE posts.created_at > '2015-01-01';
+
+SELECT comments.*, posts.title AS "Post Title"
+FROM comments JOIN posts ON comments.users_id = posts.id;
